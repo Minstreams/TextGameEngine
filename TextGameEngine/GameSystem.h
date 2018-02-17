@@ -28,6 +28,8 @@ public:
 	void Perform();
 	//сно╥╫АйЬ
 	void GameOver();
+
+
 	GameSystem();
 	~GameSystem();
 };

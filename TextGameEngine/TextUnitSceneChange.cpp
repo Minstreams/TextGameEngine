@@ -4,5 +4,8 @@
 
 void TextUnitSceneChange::OnPerform()
 {
-	GameSystem::textUnitStack.top() = sceneRoot;
+	while (!GameSystem::textUnitStack.empty()) {
+		GameSystem::textUnitStack.pop();
+	}
+	GameSystem::textUnitStack.push(sceneRoot);
 }
