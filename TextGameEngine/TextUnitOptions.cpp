@@ -14,11 +14,15 @@ void TextUnitOptions::OnPerform()
 {
 	size_t choice = 0;//当前选择
 	bool over = false;//结束指示
-
+	std::string choiceString;
 	while (!over) {
+		GameSystem::systemInstance->cmdController.SetConsoleColor(0x08);
+		GameSystem::systemInstance->cmdController.SetCursorVisible(true);
+		ClearLine(choiceString.size());
+
 		size_t charPtr = 0;
 
-		std::string choiceString = options.at(choice).text;
+		choiceString = options.at(choice).text;
 
 		bool inputed = false;//是否输入完毕？
 		bool back = false;	//是否退格？
@@ -33,7 +37,6 @@ void TextUnitOptions::OnPerform()
 				break;
 			case 8:
 				//退格
-				ClearLine(choiceString.size());
 				charPtr = 0;
 				choice++;
 				if (choice >= options.size()) {
@@ -57,6 +60,8 @@ void TextUnitOptions::OnPerform()
 		//选择完毕
 		if (!back) {
 			ClearLine(choiceString.size());
+			GameSystem::systemInstance->cmdController.SetConsoleColor(0x80);
+			GameSystem::systemInstance->cmdController.SetCursorVisible(false);
 			std::cout << choiceString;
 
 			//确认输入
@@ -72,7 +77,6 @@ void TextUnitOptions::OnPerform()
 				case 8:
 					//退格
 					check = true;
-					ClearLine(choiceString.size());
 					choice++;
 					if (choice >= options.size()) {
 						choice -= options.size();
@@ -83,7 +87,9 @@ void TextUnitOptions::OnPerform()
 				}
 			}
 		}
+		charPtr = 0;
 	}
+	GameSystem::systemInstance->cmdController.SetConsoleColor(0x07);
 	std::cout << std::endl;
-	GameSystem::textUnitStack.push(options.at(choice).ptr);
+	GameSystem::systemInstance->textUnitStack.push(options.at(choice).ptr);
 }

@@ -48,6 +48,9 @@
     <ClCompile Include="TextUnitEmpty.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="CommandController.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h">
@@ -78,6 +81,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TextUnitEmpty.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandController.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,14 +16,17 @@ void GameSystem::Launch()
 //读取设置
 void GameSystem::Init()
 {
+	//读取setting
+	setting = Setting{ 50,30 ,50 };
+
 	system("title 岷溪的文字游戏引擎V0.01");
-	system("mode con cols=50 lines=30");
+	system(("mode con cols=" + std::to_string(setting.columns) + " lines=" + std::to_string(setting.lines)).c_str());
 }
 
 //加载数据
 void GameSystem::LoadTextWorld()
 {
-	loader.LoadText(world);
+	loader.LoadText(world, std::string("data"));
 }
 
 //开始游戏演出
@@ -60,11 +63,20 @@ void GameSystem::GameOver()
 
 GameSystem::GameSystem()
 {
+	if (systemInstance != nullptr) {
+		Error("游戏系统不唯一！冲突！");
+		return;
+	}
+	systemInstance = this;
+
+	currentPath = new CHAR[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, currentPath);
 }
 
 
 GameSystem::~GameSystem()
 {
+	delete currentPath;
 }
 
-std::stack<TextUnit*> GameSystem::textUnitStack = std::stack<TextUnit*>();
+GameSystem* GameSystem::systemInstance = nullptr;

@@ -12,10 +12,15 @@ struct recordSceneToChange {
 	std::string sceneRoot;
 };
 
-void TextLoader::LoadText(TextWorld &world)
+void TextLoader::LoadText(TextWorld &world, std::string& textName)
 {
 	std::ifstream fileStream;	//文件流
-	fileStream.open("data.mts", std::ios::in);
+	fileStream.open((textName + SCRIPT_EXTENSION), std::ios::in);
+	if (!fileStream.is_open()) {
+		Error("打不开" + textName + SCRIPT_EXTENSION);
+		return;
+	}
+
 	std::vector<recordSceneToChange> sceneChangeRecord;	//记录要转换场景的地方
 	std::stack<TextUnitOptions*> optionStack;	//选项单元缓冲栈
 	optionStack.push(nullptr);
@@ -205,18 +210,6 @@ void TextLoader::LoadText(TextWorld &world)
 	}
 
 	fileStream.close();
-}
-
-void TextLoader::Error(const char* message)
-{
-	MessageBox(NULL, message, "剧本读取时出现问题!", MB_ICONEXCLAMATION);
-	//TODO 打开文件
-	exit(1);
-}
-
-void TextLoader::Error(const std::string & message)
-{
-	Error(message.c_str());
 }
 
 inline void TextLoader::AddNext(TextUnit * newUnit)

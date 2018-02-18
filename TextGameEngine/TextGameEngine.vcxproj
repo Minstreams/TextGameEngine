@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CommandController.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp" />
@@ -124,6 +125,7 @@
     <ClCompile Include="TextWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommandController.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextLoader.h" />

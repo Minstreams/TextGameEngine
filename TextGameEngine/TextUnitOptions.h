@@ -15,6 +15,6 @@ public:
 	//СЎПо
 	std::vector<Option> options;
 	void OnPerform() override;
-	~TextUnitOptions();
+	~TextUnitOptions() override;
 };
 
