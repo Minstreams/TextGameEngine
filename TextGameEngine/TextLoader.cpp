@@ -156,6 +156,7 @@ void TextLoader::LoadText(TextWorld &world, std::string& textName)
 						//创建新的选项单元
 						optionStack.top() = new TextUnitOptions();
 						AddNext(optionStack.top());
+						AddNext(new TextUnitEmpty());
 						optionStack.top()->options.push_back(TextUnitOptions::Option{ orderMessage ,nullptr });
 					}
 					else if (optionStack.top() == nullptr || number != optionStack.top()->options.size()) {
